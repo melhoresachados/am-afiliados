@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Prime Ofertas NET</title>
+  <title id="page-title">Produtos</title>
   <script>
     (function() {
       var path = (location.pathname || '').toLowerCase();
       var themes = {
-        '/am-afiliados/': { color: '#FF9900', on: '#FFFFFF', light: '#FFB347', dark: '#E47911', shadow: 'rgba(180,90,0,.35)' },
         '/sp-afiliados/': { color: '#EE4D2D', on: '#FFFFFF', light: '#ff6a1f', dark: '#ea3d1f', shadow: 'rgba(145,29,4,.35)' },
         '/sh-afiliados/': { color: '#111111', on: '#FFFFFF', light: '#2a2a2a', dark: '#000000', shadow: 'rgba(0,0,0,.35)' },
         '/ml-afiliados/': { color: '#1E4FAF', on: '#FFFFFF', light: '#3f70d1', dark: '#123b88', shadow: 'rgba(10,34,89,.35)' }
       };
-      var theme = themes['/am-afiliados/'];
+      var theme = themes['/sp-afiliados/'];
       for (var key in themes) {
-        if (path.indexOf(key) !== -1) { theme = themes[key]; break; }
+        if (path.indexOf(key) !== -1) {
+          theme = themes[key];
+          break;
+        }
       }
       var root = document.documentElement;
       root.style.setProperty('--color', theme.color);
@@ -28,13 +30,13 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f6f4f1;min-height:100vh;color:#243041}
-    :root{--color:#FF9900;--on-color:#FFFFFF;--color-light:#FFB347;--color-dark:#E47911;--color-shadow:rgba(180,90,0,.35)}
+    :root{--color:#EE4D2D;--on-color:#FFFFFF;--color-light:#ff6a1f;--color-dark:#ea3d1f;--color-shadow:rgba(145,29,4,.35)}
     header{position:sticky;top:0;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.15);background:linear-gradient(180deg,var(--color-light) 0%,var(--color) 55%,var(--color-dark) 100%);color:var(--on-color)}
     .hero{position:relative;overflow:hidden}
     .hero-banner{height:132px;background:radial-gradient(circle at top,rgba(255,255,255,.30) 0%,rgba(255,255,255,.12) 18%,transparent 42%),linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));display:flex;align-items:center;justify-content:center}
     .hero-banner.has-image{background-size:cover;background-position:center}
     .hero-content{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px;text-align:center}
-    .hero-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;text-shadow:0 3px 12px rgba(140,60,0,.45)}
+    .hero-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;text-shadow:0 3px 12px rgba(128,20,0,.35)}
     .hero-subtitle{background:rgba(255,255,255,.18);color:var(--on-color);padding:7px 16px;border-radius:999px;font-size:1rem;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.18);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.18)}
     .hero-banner::after{content:'';position:absolute;inset:auto 0 0 0;height:42px;background:linear-gradient(180deg,rgba(0,0,0,0),var(--color-shadow))}
     .toolbar{padding:12px 16px 14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.08));border-top:1px solid rgba(255,255,255,.15)}
@@ -84,8 +86,8 @@
   <div class="hero">
     <div class="hero-banner" id="hero-banner">
       <div class="hero-content">
-        <div class="hero-title" id="header-title">Prime Ofertas NET</div>
-        <div class="hero-subtitle">As melhores ofertas da Amazon!</div>
+        <div class="hero-title" id="header-title">Produtos</div>
+        <div class="hero-subtitle">Descontos imperdíveis para você!</div>
       </div>
     </div>
   </div>
@@ -100,7 +102,7 @@
     <button class="tab active" data-filter="all">Todos</button>
     <button class="tab" data-filter="favorites">Favoritos</button>
     <button class="tab" data-filter="flash">Ofertas Relâmpago</button>
-    <button class="tab" data-filter="popular">Mais Vendidos</button>
+    <button class="tab" data-filter="popular">Ofertas Populares</button>
   </div>
 </header>
 <div class="grid" id="grid"></div>
@@ -114,7 +116,7 @@ function clamp(v,min,max){return Math.min(max,Math.max(min,v));}
 function hexToRgb(hex){
   const raw=(hex||'').replace('#','').trim();
   const full=raw.length===3?raw.split('').map(c=>c+c).join(''):raw;
-  if(full.length!==6){return {r:255,g:153,b:0};}
+  if(full.length!==6){return {r:238,g:77,b:45};}
   return {r:parseInt(full.slice(0,2),16),g:parseInt(full.slice(2,4),16),b:parseInt(full.slice(4,6),16)};
 }
 function rgbToHex(r,g,b){
@@ -165,14 +167,14 @@ async function init(){
     const r=await fetch('data.json?t='+Date.now());
     const d=await r.json();
     window.catalogData=d;
-    const c=d.theme_color||'#FF9900';
+    const c=d.theme_color||'#EE4D2D';
     const onColor=d.theme_text_color||'#FFFFFF';
     document.documentElement.style.setProperty('--color',c);
     document.documentElement.style.setProperty('--on-color',onColor);
     document.documentElement.style.setProperty('--color-light',shiftColor(c,28));
     document.documentElement.style.setProperty('--color-dark',shiftColor(c,-26));
     document.documentElement.style.setProperty('--color-shadow',rgbaFromHex(shiftColor(c,-52),0.35));
-    const t=d.account_name||'Prime Ofertas NET';
+    const t=d.account_name||'Produtos';
     document.getElementById('page-title').textContent=t;
     const headerTitle=document.getElementById('header-title');
     if(headerTitle){headerTitle.textContent=t;}
@@ -206,11 +208,11 @@ function render(list){
   g.innerHTML=list.map(p=>{
     const img=p.image_url
       ?`<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">`
-      :`<div class="card-placeholder">🛒</div>`;
+      :`<div class="card-placeholder">🛍️</div>`;
     const badge=p.badge_text?`<div class="card-badge">${p.badge_text}</div>`:'';
     const price=p.price?`<div class="card-price">${p.price}</div>`:'';
     const favClass=favorites.includes(p.id)?'active':'';
-    return`<div class="card"><div class="card-img-wrap">${badge}<button class="fav-btn ${favClass}" onclick="toggleFavorite('${p.id}','${account}')" title="Favoritar">❤</button>${img}<div class="card-overlay"><span class="card-num">Prod. Nº ${p.num}</span><div class="card-name">${p.name}</div></div></div>${price}<a class="card-btn" href="${p.affiliate_url||'#'}" rel="nofollow sponsored">Ver na Amazon</a></div>`;
+    return`<div class="card"><div class="card-img-wrap">${badge}<button class="fav-btn ${favClass}" onclick="toggleFavorite('${p.id}','${account}')" title="Favoritar">❤</button>${img}<div class="card-overlay"><span class="card-num">Prod. Nº ${p.num}</span><div class="card-name">${p.name}</div></div></div>${price}<a class="card-btn" href="${p.affiliate_url||'#'}" rel="nofollow sponsored">Ver Produto</a></div>`;
   }).join('');
 }
 document.getElementById('num-input').addEventListener('input',function(){applyFilters();});
