@@ -1,455 +1,227 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title id="page-title">Produtos</title>
-
   <script>
-
     (function() {
-
       var path = (location.pathname || '').toLowerCase();
-
       var themes = {
-
         '/sp-afiliados/': { color: '#EE4D2D', on: '#FFFFFF', light: '#ff6a1f', dark: '#ea3d1f', shadow: 'rgba(145,29,4,.35)' },
-
         '/sh-afiliados/': { color: '#111111', on: '#FFFFFF', light: '#2a2a2a', dark: '#000000', shadow: 'rgba(0,0,0,.35)' },
-
-        '/ml-afiliados/': { color: '#1E4FAF', on: '#FFFFFF', light: '#3f70d1', dark: '#123b88', shadow: 'rgba(10,34,89,.35)' },
-        '/am-afiliados/': { color: '#FF9900', on: '#FFFFFF', light: '#FFB347', dark: '#E47911', shadow: 'rgba(140,68,0,.35)' }
-
+        '/ml-afiliados/': { color: '#1E4FAF', on: '#FFFFFF', light: '#3f70d1', dark: '#123b88', shadow: 'rgba(10,34,89,.35)' }
       };
-
-      var theme = themes['/am-afiliados/'];
-
+      var theme = themes['/sp-afiliados/'];
       for (var key in themes) {
-
         if (path.indexOf(key) !== -1) {
-
           theme = themes[key];
-
           break;
-
         }
-
       }
-
       var root = document.documentElement;
-
       root.style.setProperty('--color', theme.color);
-
       root.style.setProperty('--on-color', theme.on);
-
       root.style.setProperty('--color-light', theme.light);
-
       root.style.setProperty('--color-dark', theme.dark);
-
       root.style.setProperty('--color-shadow', theme.shadow);
-
     })();
-
   </script>
-
   <style>
-
     *{margin:0;padding:0;box-sizing:border-box}
-
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f6f4f1;min-height:100vh;color:#243041}
-
-    :root{--color:#FF9900;--on-color:#FFFFFF;--color-light:#FFB347;--color-dark:#E47911;--color-shadow:rgba(140,68,0,.35)}
-
+    :root{--color:#EE4D2D;--on-color:#FFFFFF;--color-light:#ff6a1f;--color-dark:#ea3d1f;--color-shadow:rgba(145,29,4,.35)}
     header{position:sticky;top:0;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.15);background:linear-gradient(180deg,var(--color-light) 0%,var(--color) 55%,var(--color-dark) 100%);color:var(--on-color)}
-
     .hero{position:relative;overflow:hidden}
-
     .hero-banner{height:132px;background:radial-gradient(circle at top,rgba(255,255,255,.30) 0%,rgba(255,255,255,.12) 18%,transparent 42%),linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));display:flex;align-items:center;justify-content:center}
-
     .hero-banner.has-image{background-size:cover;background-position:center}
-
     .hero-content{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px;text-align:center}
-
     .hero-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;text-shadow:0 3px 12px rgba(128,20,0,.35)}
-
     .hero-subtitle{background:rgba(255,255,255,.18);color:var(--on-color);padding:7px 16px;border-radius:999px;font-size:1rem;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.18);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.18)}
-
     .hero-banner::after{content:'';position:absolute;inset:auto 0 0 0;height:42px;background:linear-gradient(180deg,rgba(0,0,0,0),var(--color-shadow))}
-
     .toolbar{padding:12px 16px 14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.08));border-top:1px solid rgba(255,255,255,.15)}
-
     .search-row{display:flex;gap:10px;max-width:760px;margin:0 auto;align-items:center}
-
     .search-row input{flex:1;padding:12px 16px;border:none;border-radius:12px;font-size:1rem;outline:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
-
     .search-row button,.icon-btn{background:rgba(255,255,255,.16);color:var(--on-color);border:2px solid rgba(255,255,255,.45);padding:11px 16px;border-radius:12px;cursor:pointer;font-size:.92rem;font-weight:800;white-space:nowrap}
-
     .icon-btn{min-width:48px;padding:11px 12px}
-
     .search-row button:hover,.icon-btn:hover{background:rgba(255,255,255,.25)}
-
     .tabs{display:flex;gap:10px;overflow:auto;padding:12px 16px 14px;max-width:980px;margin:0 auto}
-
     .tab{border:none;background:rgba(255,255,255,.12);color:#fff;padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
-
     .tab.active{background:#fff;color:var(--color-dark);box-shadow:0 8px 18px rgba(0,0,0,.15)}
-
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;padding:20px;max-width:1020px;margin:0 auto}
-
     .card{background:#fff;border-radius:22px;overflow:visible;box-shadow:0 16px 36px rgba(18,38,63,.12);transition:transform .18s,box-shadow .18s;position:relative;padding:12px;display:flex;flex-direction:column;gap:10px}
-
     .card:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(18,38,63,.16)}
-
     .card-img-wrap{position:relative}
-
     .card-img{width:100%;aspect-ratio:.70;object-fit:cover;background:#eee;display:block;border-radius:16px}
-
     .card-placeholder{width:100%;aspect-ratio:.70;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;border-radius:16px}
-
     .card-badge{position:absolute;top:0;left:0;background:#FFD233;color:#D9480F;font-size:.72rem;font-weight:900;padding:8px 14px;border-radius:16px 0 16px 0;box-shadow:0 8px 18px rgba(255,210,51,.35)}
-
     .fav-btn{position:absolute;top:-8px;right:-8px;border:none;background:rgba(255,255,255,.96);width:40px;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:#E11D48;box-shadow:0 10px 20px rgba(0,0,0,.16);z-index:4}
-
     .fav-btn.active{background:#E11D48;color:#fff}
-
     .card-overlay{position:absolute;left:0;right:0;bottom:0;padding:54px 12px 12px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.18) 28%,rgba(0,0,0,.78) 100%);border-radius:0 0 16px 16px}
-
     .card-num{display:inline-block;background:var(--color);color:#fff;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px;margin-bottom:8px}
-
     .card-name{font-size:1rem;font-weight:800;color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.32;text-shadow:0 2px 8px rgba(0,0,0,.35)}
-
     .card-price{font-size:1rem;font-weight:800;color:var(--color);margin:0}
-
     .card-btn{display:block;width:100%;background:var(--color);color:#fff;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-size:.94rem;font-weight:800}
-
     .card-btn:hover{opacity:.88}
-
     .empty{text-align:center;padding:50px 16px;color:#999;font-size:.95rem}
-
     footer{text-align:center;padding:24px 16px;color:#9aa4b2;font-size:.78rem}
-
     .hidden{display:none!important}
-
     @media (max-width: 640px){
-
       .hero-banner{height:116px}
-
       .hero-banner .hero-content{display:none}
-
       .search-row{gap:8px}
-
       #favorites-only-btn{display:none}
-
       .search-row button,.icon-btn{padding:10px 12px}
-
       .grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px;gap:12px}
-
       .card{padding:10px}
-
     }
-
     @media (min-width: 641px){
-
       .hero-banner.has-image{background-image:none!important}
-
       .hero-banner .hero-content{display:flex}
-
     }
-
   </style>
-
 </head>
-
 <body>
-
 <header>
-
   <div class="hero">
-
     <div class="hero-banner" id="hero-banner">
-
       <div class="hero-content">
-
         <div class="hero-title" id="header-title">Produtos</div>
-
         <div class="hero-subtitle">Descontos imperdíveis para você!</div>
-
       </div>
-
     </div>
-
   </div>
-
   <div class="toolbar">
-
     <div class="search-row">
-
       <input type="number" id="num-input" placeholder="Número do produto..." min="1">
-
       <button onclick="clearSearch()">Ver todos</button>
-
       <button class="icon-btn" id="favorites-only-btn" title="Favoritos">❤</button>
-
     </div>
-
   </div>
-
   <div class="tabs" id="tabs">
-
     <button class="tab active" data-filter="all">Todos</button>
-
     <button class="tab" data-filter="favorites">Favoritos</button>
-
     <button class="tab" data-filter="flash">Ofertas Relâmpago</button>
-
-    <button class="tab" data-filter="popular">Mais Vendidos</button>
-
+    <button class="tab" data-filter="popular">Ofertas Populares</button>
   </div>
-
 </header>
-
 <div class="grid" id="grid"></div>
-
 <div class="empty hidden" id="empty">Produto não encontrado.</div>
-
 <footer id="footer"></footer>
-
 <script>
-
 let all=[];
-
 let currentFilter='all';
-
 const favoriteKey=(account)=>`catalog_favorites_${account||'default'}`;
-
 function clamp(v,min,max){return Math.min(max,Math.max(min,v));}
-
 function hexToRgb(hex){
-
   const raw=(hex||'').replace('#','').trim();
-
   const full=raw.length===3?raw.split('').map(c=>c+c).join(''):raw;
-
   if(full.length!==6){return {r:238,g:77,b:45};}
-
   return {r:parseInt(full.slice(0,2),16),g:parseInt(full.slice(2,4),16),b:parseInt(full.slice(4,6),16)};
-
 }
-
 function rgbToHex(r,g,b){
-
   return '#'+[r,g,b].map(v=>clamp(v,0,255).toString(16).padStart(2,'0')).join('');
-
 }
-
 function shiftColor(hex,amount){
-
   const {r,g,b}=hexToRgb(hex);
-
   return rgbToHex(r+amount,g+amount,b+amount);
-
 }
-
 function rgbaFromHex(hex,alpha){
-
   const {r,g,b}=hexToRgb(hex);
-
   return `rgba(${r},${g},${b},${alpha})`;
-
 }
-
 function readFavorites(account){
-
   try{return JSON.parse(localStorage.getItem(favoriteKey(account))||'[]');}catch(e){return [];}
-
 }
-
 function writeFavorites(account,items){
-
   localStorage.setItem(favoriteKey(account),JSON.stringify(items));
-
 }
-
 function toggleFavorite(id,account){
-
   const current=readFavorites(account);
-
   const next=current.includes(id)?current.filter(x=>x!==id):[...current,id];
-
   writeFavorites(account,next);
-
   applyFilters();
-
 }
-
 function filterProducts(products){
-
   const account=(window.catalogData||{}).account||'';
-
   const favorites=readFavorites(account);
-
   let list=[...products];
-
   if(currentFilter==='popular'){list=list.filter(p=>p.is_popular);}
-
   if(currentFilter==='flash'){list=list.filter(p=>p.is_flash);}
-
   if(currentFilter==='favorites'){list=list.filter(p=>favorites.includes(p.id));}
-
   const v=document.getElementById('num-input').value.trim();
-
   if(v){list=list.filter(p=>p.num===parseInt(v));}
-
   return list;
-
 }
-
 function updateActiveTab(){
-
   document.querySelectorAll('.tab').forEach(tab=>{
-
     tab.classList.toggle('active',tab.dataset.filter===currentFilter);
-
   });
-
 }
-
 function applyFilters(){
-
   updateActiveTab();
-
   render(filterProducts(all));
-
 }
-
 async function init(){
-
   try{
-
     const r=await fetch('data.json?t='+Date.now());
-
     const d=await r.json();
-
     window.catalogData=d;
-
     const c=d.theme_color||'#EE4D2D';
-
     const onColor=d.theme_text_color||'#FFFFFF';
-
     document.documentElement.style.setProperty('--color',c);
-
     document.documentElement.style.setProperty('--on-color',onColor);
-
     document.documentElement.style.setProperty('--color-light',shiftColor(c,28));
-
     document.documentElement.style.setProperty('--color-dark',shiftColor(c,-26));
-
     document.documentElement.style.setProperty('--color-shadow',rgbaFromHex(shiftColor(c,-52),0.35));
-
     const t=d.account_name||'Produtos';
-
     document.getElementById('page-title').textContent=t;
-
     const headerTitle=document.getElementById('header-title');
-
     if(headerTitle){headerTitle.textContent=t;}
-
     const hero=document.getElementById('hero-banner');
-
     if(d.header_banner_url){
-
       hero.classList.add('has-image');
-
       hero.style.backgroundImage=`linear-gradient(180deg,${rgbaFromHex(c,0.10)},${rgbaFromHex(shiftColor(c,-28),0.18)}),url('${d.header_banner_url}?v=${encodeURIComponent(d.updated_at||Date.now())}')`;
-
     }
-
     all=(d.products||[]).sort((a,b)=>b.num-a.num);
-
     applyFilters();
-
     const u=d.updated_at?new Date(d.updated_at).toLocaleDateString('pt-BR'):'';
-
     document.getElementById('footer').textContent=u?'Atualizado em '+u:'';
-
     document.querySelectorAll('.tab').forEach(tab=>{
-
       tab.addEventListener('click',()=>{currentFilter=tab.dataset.filter;applyFilters();});
-
     });
-
     document.getElementById('favorites-only-btn').addEventListener('click',()=>{
-
       currentFilter=currentFilter==='favorites'?'all':'favorites';
-
       applyFilters();
-
     });
-
   }catch(e){
-
     document.getElementById('grid').innerHTML='<p style="padding:30px;color:#aaa">Nenhum produto disponível ainda.</p>';
-
   }
-
 }
-
 function render(list){
-
   const g=document.getElementById('grid');
-
   const e=document.getElementById('empty');
-
   const account=(window.catalogData||{}).account||'';
-
   const favorites=readFavorites(account);
-
   if(!list.length){g.innerHTML='';e.classList.remove('hidden');return;}
-
   e.classList.add('hidden');
-
   g.innerHTML=list.map(p=>{
-
     const img=p.image_url
-
       ?`<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">`
-
       :`<div class="card-placeholder">🛍️</div>`;
-
     const badge=p.badge_text?`<div class="card-badge">${p.badge_text}</div>`:'';
-
     const price=p.price?`<div class="card-price">${p.price}</div>`:'';
-
     const favClass=favorites.includes(p.id)?'active':'';
-
-    return`<div class="card"><div class="card-img-wrap">${badge}<button class="fav-btn ${favClass}" onclick="toggleFavorite('${p.id}','${account}')" title="Favoritar">❤</button>${img}<div class="card-overlay"><span class="card-num">Prod. Nº ${p.num}</span><div class="card-name">${p.name}</div></div></div>${price}<a class="card-btn" href="${p.affiliate_url||'#'}" rel="nofollow sponsored">Ver na Amazon</a></div>`;
-
+    return`<div class="card"><div class="card-img-wrap">${badge}<button class="fav-btn ${favClass}" onclick="toggleFavorite('${p.id}','${account}')" title="Favoritar">❤</button>${img}<div class="card-overlay"><span class="card-num">Prod. Nº ${p.num}</span><div class="card-name">${p.name}</div></div></div>${price}<a class="card-btn" href="${p.affiliate_url||'#'}" rel="nofollow sponsored">Ver Produto</a></div>`;
   }).join('');
-
 }
-
 document.getElementById('num-input').addEventListener('input',function(){applyFilters();});
-
 function clearSearch(){
-
   document.getElementById('num-input').value='';
-
   currentFilter='all';
-
   applyFilters();
-
 }
-
 init();
-
 </script>
-
 </body>
-
 </html>
-
