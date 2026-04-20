@@ -1,23 +1,9 @@
 {
   "account": "amazon",
-  "account_name": "Prime Ofertas NET",
-  "theme_color": "#FF9900",
+  "account_name": "Amazon",
+  "theme_color": "#333333",
   "theme_text_color": "#FFFFFF",
   "header_banner_url": "images/header-banner.png",
-  "updated_at": "2026-04-20T14:25:58.901166",
-  "products": [
-    {
-      "id": "b9b7164a-0521-4c84-8661-eb0cad5299c2",
-      "num": 1,
-      "name": "Papel de Parede Adesivo Autocoloante Imitação Madeira Ripado Decoração Quarto Sala Escritório 3 Metros",
-      "price": "",
-      "affiliate_url": "https://amzn.to/4cCFtfp",
-      "image_url": "https://pub-971b79479fa9403d85ad248676016997.r2.dev/amazon/images/produto_1_papel-de-parede-adesivo-autocoloante-imita-o-madeira-ripado-.jpg",
-      "badge_text": "Achado do Dia!",
-      "has_coupon": false,
-      "is_flash": false,
-      "is_popular": false,
-      "published_at": "2026-04-20 14:25"
-    }
-  ]
+  "updated_at": "2026-04-20T17:12:56.394155",
+  "products": []
 }
